@@ -1,0 +1,19 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+
+[packages]
+kaggle = "*"
+tqdm = "*"
+jupyterlab = "*"
+pandas = "*"
+nltk = "*"
+
+[scripts]
+jupyter="jupyter lab --no-browser --port=8888 --ip=0.0.0.0 --allow-root --NotebookApp.token=''"
+
+[requires]
+python_version = "3.8"
