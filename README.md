@@ -6,6 +6,6 @@
 $ pipenv install
 # first activate
 $ pipenv shell
-# activate for othoer shell
-$ source $(pipenv --ve:nv)/bin/activate
+# activate for other shell
+$ source $(pipenv --venv)/bin/activate
 ```
