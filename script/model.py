@@ -138,14 +138,14 @@ def get_bert_model(train, valid):
         'verbosity': -1,
         'boosting_type': 'gbdt',
         'learning_rate': 0.1,
-        'lambda_l1': 3.642434329823594, 
-        'lambda_l2': 1.0401748765492007e-08, 
-        'num_leaves': 172, 
-        'feature_fraction': 0.8251431673667773, 
-        'bagging_fraction': 0.9755605959841563, 
-        'bagging_freq': 2, 
-        'min_child_samples': 5, 
-        'random_state': 68
+        'lambda_l1': 0.0003543420203502818, 
+        'lambda_l2': 4.468466658809475, 
+        'num_leaves': 169, 
+        'feature_fraction': 0.8390907205934592, 
+        'bagging_fraction': 0.8070674146918868, 
+        'bagging_freq': 5, 
+        'min_child_samples': 65, 
+        'random_state': 5
     }
 
     model = lgb.train(

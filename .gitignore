@@ -128,3 +128,5 @@ dmypy.json
 # Pyre type checker
 .pyre/
 catboost_info
+
+checkpoint.pt
