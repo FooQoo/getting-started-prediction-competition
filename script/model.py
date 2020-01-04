@@ -175,17 +175,16 @@ def get_merge_model(train, valid):
     y_train, y_valid = train.target, valid.target
     
     params = {
-        'solver': 'saga',
-        'max_iter': 100,
-        'verbose': 0,
-        'n_jobs': -1,
-        'penalty': 'elasticnet', 
-        'class_weight': None, 
-        'warm_start': False, 
-        'random_state': 25, 
-        'multi_class': 'ovr', 
-        'l1_ratio': 0.05374396158679226, 
-        'C': 0.0022149471434149024
+      'max_iter': 100,
+      'verbose': 0,
+      'n_jobs': -1,
+      'penalty': 'l2', 
+      'class_weight': None, 
+      'warm_start': False, 
+      'random_state': 33, 
+      'multi_class': 'auto', 
+      'solver': 'saga', 
+      'C': 0.0017866172292125638
     }
     
     model = LogisticRegression(**params)
