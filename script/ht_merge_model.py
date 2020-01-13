@@ -10,7 +10,7 @@ from sklearn.metrics import confusion_matrix, classification_report, f1_score
 from tqdm import tqdm
 
 def get_merge_model(train, valid, hp):  
-    c_merge = ['text', 'category']
+    c_merge = ['text', 'category', 'bert']
     X_train, X_valid, = train[c_merge].values, valid[c_merge].values
     y_train, y_valid = train.target, valid.target
 

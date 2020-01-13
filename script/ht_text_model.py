@@ -9,7 +9,7 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import confusion_matrix, classification_report, f1_score
 from tqdm import tqdm
 
-def get_text_model(train, valid, hp):  
+def get_bert_model(train, valid, hp):  
     def get_c_with_prefix(prefix):
         return [column for column in train.columns.tolist() if prefix == column[:len(prefix)]]
     

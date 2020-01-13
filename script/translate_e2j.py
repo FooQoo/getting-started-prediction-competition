@@ -34,7 +34,10 @@ def trans_en_ja(array_key: list, num_text: int, sleep_time: float):
             pass
         
         del translator
+        
         sleep(sleep_time)
+    
+    pd.DataFrame({'ja': array_key_ja}).to_csv('./fact/fp_j_wip.csv')
     
     if len(array_key_en) != len(array_key_ja):
         raise Exception('Invalid length of both array.')

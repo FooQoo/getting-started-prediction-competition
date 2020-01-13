@@ -102,6 +102,7 @@ class PreprocessText:
         
     def format_text(self, text):
         text=re.sub(r'https?://[\w/:%#\$&\?\(\)~\.=\+\-]+', '', text)
+        text=re.sub('(?<=[\s^])#\w+(?=[\s$])', '', text)
         text=re.sub('RT', '', text)
         text=re.sub(r'[!-/?:@]', '', text)#半角記号,数字,英字
         text=re.sub(r'[︰-＠]', '', text)#全角記号
