@@ -14,7 +14,6 @@ import pdb
 import glob
 
 class DisasterClassifier(nn.Module):
-    
     def __init__(self, freeze_bert = True, hidden_size=768, num_class=2):
         super(DisasterClassifier, self).__init__()
         #Instantiating BERT model obeject
@@ -48,6 +47,7 @@ class DisasterClassifier(nn.Module):
         atten = torch.sum(ht_cls * self.weights.view(13, 1, 1, 1), dim=[1, 3])
         atten = F.softmax(atten.view(-1), dim=0)
         feature = torch.sum(ht_cls * atten.view(13, 1, 1, 1), dim=[0, 2])
+        
         for i, dropout in enumerate(self.dropouts):
             if i==0:
                 h = self.fc(dropout(feature))

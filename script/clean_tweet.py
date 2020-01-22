@@ -1,6 +1,7 @@
 import numpy as np
 import pandas as pd
 import re
+from itertools import chain, combinations
 from nltk.tokenize import word_tokenize
 from spellchecker import SpellChecker
 from nltk.stem import WordNetLemmatizer 
@@ -23,8 +24,8 @@ def untokenize(words):
     step5 = step4.replace(" '", "'").replace(" n't", "n't").replace(
         "can not", "cannot")
     step6 = step5.replace(" ` ", " '")
-    step7 = re.sub(r'([a-zA-Z])\1{3,}', r'\1\1', step6) # new
-    return step7.strip()
+    #step7 = re.sub(r'([a-zA-Z])\1{3,}', r'\1\1', step6) # new
+    return step6.strip()
 
 # https://stackoverflow.com/a/47091490
 def decontracted(phrase):
@@ -405,10 +406,19 @@ def clean_all(t, correct_spelling=False, remove_stopwords=False, lemmatize=False
 
     return t
 
+def get_biterm(doc):
+    return ' '.join([biterm for biterm in [
+        '_'.join(sorted(biterm)) for biterm in combinations(doc.split(), 2) if biterm[0] != biterm[1]
+    ]])
+
 def get_clean_df(i, o):
     df = pd.read_csv(i)
-    df['clean'] = df.progress_apply(lambda x: clean_all(x['text'], True, False), axis=1)
-    df[['id', 'clean']].to_csv(o, index=None, sep='\t')
+    
+    df['url'] = df.progress_apply(lambda x: ' '.join(re.findall(r'https?://[\w/:%#\$&\?\(\)~\.=\+\-]+', x['text'])), axis=1)
+    df['hashtag'] = df.progress_apply(lambda x: ' '.join(re.findall(r'(?<=[\s^])#\w+(?=[\s$])', x['text'])), axis=1)
+    df['clean'] = df.progress_apply(lambda x: clean_all(x['text'], False, False), axis=1)
+    df['biterms'] = df.progress_apply(lambda x: get_biterm(x['clean']), axis=1)
+    df.to_csv(o, index=None, sep='\t')
     
 if __name__ == '__main__':
     get_clean_df('./data/train.csv', './file/train_clean.tsv')
